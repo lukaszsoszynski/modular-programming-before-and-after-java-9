@@ -1,0 +1,32 @@
+<entity-mappings xmlns="http://xmlns.jcp.org/xml/ns/persistence/orm"
+                 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                 xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence/orm
+      http://xmlns.jcp.org/xml/ns/persistence/orm_2_1.xsd"
+                 version="2.1">
+    <entity class="com.gfi.lsos.training.jigsaw.model.Forum" access="FIELD">
+        <table name="forum" />
+        <attributes>
+            <id name="name">
+                <column name="name" />
+            </id>
+            <one-to-many name="posts" mapped-by="forum" orphan-removal="true">
+                <cascade>
+                    <cascade-all/>
+                </cascade>
+            </one-to-many>
+        </attributes>
+    </entity>
+    <entity class="com.gfi.lsos.training.jigsaw.model.Post" access="FIELD">
+        <table name="post" />
+        <attributes>
+            <id name="id">
+                <column name="id" />
+                <generated-value generator="post_sequence_generator" strategy="SEQUENCE"/>
+                <sequence-generator name="post_sequence_generator" sequence-name="seq_post" allocation-size="1" initial-value="1000" />
+            </id>
+            <many-to-one name="forum">
+                <join-column name="forum_name" updatable="false" />
+            </many-to-one>
+        </attributes>
+    </entity>
+</entity-mappings>

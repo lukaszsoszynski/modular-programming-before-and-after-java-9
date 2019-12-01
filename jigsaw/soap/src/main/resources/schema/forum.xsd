@@ -1,0 +1,45 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://gfi.com/lsos/training/jigsaw/soap"
+           targetNamespace="http://gfi.com/lsos/training/jigsaw/soap" elementFormDefault="qualified">
+
+    <xs:complexType name="postType">
+        <xs:choice>
+            <xs:element type="xs:string" name="title" />
+            <xs:element type="xs:string" name="content" />
+        </xs:choice>
+        <xs:attribute type="xs:string" name="forumName"/>
+    </xs:complexType>
+    <xs:complexType name="PersistentPostType">
+        <xs:complexContent>
+            <xs:extension base="tns:postType">
+                <xs:choice>
+                    <xs:element type="xs:long" name="postId"/>
+                </xs:choice>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+
+    <xs:element name="getAllPostRequest">
+        <xs:complexType>
+            <xs:attribute name="forumName" type="xs:string" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="getAllPostResponse" >
+        <xs:complexType>
+            <xs:sequence maxOccurs="unbounded">
+                <xs:element name="post" type="tns:PersistentPostType"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="createPostRequest" type="tns:postType"/>
+
+    <xs:element name="removePostRequest">
+        <xs:complexType>
+            <xs:attribute name="forumName" type="xs:string"/>
+            <xs:attribute name="postId" type="xs:long" />
+        </xs:complexType>
+    </xs:element>
+
+    <xs:element name="updatePostRequest" type="tns:PersistentPostType"/>
+</xs:schema>

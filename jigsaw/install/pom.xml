@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.gfi.lsos.training.jigsaw</groupId>
+        <artifactId>root</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>jar</packaging>
+
+    <groupId>com.gfi.lsos.training.jigsaw</groupId>
+    <artifactId>install</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.gfi.lsos.training.jigsaw</groupId>
+            <artifactId>rest-primary-adapter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gfi.lsos.training.jigsaw</groupId>
+            <artifactId>soap-primary-adapter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gfi.lsos.training.jigsaw</groupId>
+            <artifactId>amqp-secondary-adapter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.gfi.lsos.training.jigsaw</groupId>
+            <artifactId>repository-secondary-adapter</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>net.bytebuddy</groupId>
+            <artifactId>byte-buddy</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-runtime</artifactId>
+            <version>2.4.0-b180608.0325</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.sun.activation</groupId>
+                    <artifactId>javax.activation</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-xjc</artifactId>
+            <version>2.4.0-b180608.0325</version>
+        </dependency>
+        <dependency>
+            <groupId>org.glassfish.jaxb</groupId>
+            <artifactId>jaxb-jxc</artifactId>
+            <version>2.4.0-b180608.0325</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+
+<!--            <plugin>-->
+<!--                <groupId>org.springframework.boot</groupId>-->
+<!--                <artifactId>spring-boot-maven-plugin</artifactId>-->
+<!--            </plugin>-->
+            <!-- to get dependencies mvn clean dependency:copy-dependencies-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <configuration>
+                    <outputDirectory>
+                        ${project.build.directory}/dependencies
+                    </outputDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
